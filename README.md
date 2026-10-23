@@ -3,10 +3,11 @@
 Compact, reproducible code for the short communication **Knowledge-Guided AI
 for Sales Data Analysis and Marketing Performance: A Hybrid Forecasting Model**.
 
-The method combines an explicit store-weekday sales norm and learned promotion
-uplift with a histogram gradient-boosting model through a knowledge feature. Business constraints
-set closed-store forecasts to zero and prevent negative sales. Evaluation uses
-the final 42 days as a chronological holdout and reports MAE, WAPE, and RMSPE.
+The method combines an explicit store-weekday sales norm and bounded promotion
+uplift with histogram gradient boosting. Business rules set closed-store
+forecasts to zero and prevent negative sales. Evaluation uses three rolling
+42-day tests, matched baselines, component ablations, marketing-segment
+diagnostics, and a paired day-level statistical test.
 
 ## Reproduce
 
@@ -24,8 +25,8 @@ local copy instead:
 python run_experiment.py --data /path/to/train.csv
 ```
 
-Two manuscript-ready CSV tables are written to `results/`. The dataset is not
-redistributed in this repository.
+The script creates exactly two manuscript tables and two publication figures
+inside `results/`. The dataset is not redistributed in this repository.
 
 ## Method in one line
 
@@ -34,7 +35,7 @@ redistributed in this repository.
 ## Reproducibility
 
 - Fixed random seed: 42
-- Leakage-resistant chronological split: last 42 days
+- Leakage-resistant evaluation: three rolling 42-day windows
 - No customer-count feature (unavailable at forecast time)
 - Source data: Rossmann Store Sales public Kaggle benchmark
 - License: MIT for the code; source-data terms remain with the data provider
